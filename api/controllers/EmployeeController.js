@@ -46,9 +46,9 @@ module.exports = {
     heureSupplementaire: function(req, res) {
         var empid = req.query.empid;
         var enable = req.query.enable;
-        Employe.FindOne({ id: empid })
+        Employee.findOne(_.pick(req.query,'id') )
             .then(function(employee) {
-                employee.heureSupplementaire = enable;
+                employee.heuresupplementaire = enable || !employee.heuresupplementaire;
                 employee.save(function() {
                     return res.ok();
                 });

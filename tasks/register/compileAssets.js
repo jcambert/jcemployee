@@ -16,7 +16,18 @@ module.exports = function(grunt) {
     'clean:dev',
     'jst:dev',
     'less:dev',
+    'sass-injection:devMain',
+    'sass:devMain',
+    'sass:dev404',
+    'sass:devAuth',
+
+    //'ngtemplates:devFormBuilderCore',
+    //'ngtemplates:devFormBuilderComponents',
+    //'ngtemplates:devOverlay',
+    //'ngtemplates:devAtf',
+
     'copy:dev',
-    'coffee:dev'
+    'coffee:dev',
+    'clean:sails'
   ]);
 };

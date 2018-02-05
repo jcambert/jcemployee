@@ -2,10 +2,21 @@ var _ = require('lodash');
 var moment = require('moment');
 moment.locale('fr');
 
+function now(){
+    var d=new Date();
+    return d.getHours()+minuteToCentieme(d.getMinutes());
+}
+function minuteToCentieme(minute){
+    return minute/60;
+}
+function splitTime(time){
+    return [Math.trunc(time),Number((time-Math.trunc(time)).toFixed(2))];
+}
+/*
 function splitTime(time) {
     var s = time.split(":");
     return [Number(s[0]), Number(s[1])];
-}
+}*/
 
 function timeToFloat(time) {
     var _in = splitTime(time);
@@ -39,6 +50,8 @@ function makeDateTime(year, month, day, hour, minute) {
     return moment().year(year).month(month).day(day).hour(hour).minute(minute);
 }
 module.exports = {
+    now:now,
+    minuteToCentieme:minuteToCentieme,
     timeToFloat: timeToFloat,
     timeOfDateTimeToFloat: timeOfDateTimeToFloat,
     dayOfWeek: dayOfWeek,

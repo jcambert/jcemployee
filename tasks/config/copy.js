@@ -26,7 +26,7 @@ module.exports = function(grunt) {
       files: [{
         expand: true,
         cwd: './assets',
-        src: ['**/*.!(coffee|less)'],
+        src: ['**/*.!(coffee|less|scss|sass)'],
         dest: '.tmp/public'
       }]
     },
@@ -37,6 +37,14 @@ module.exports = function(grunt) {
         src: ['**/*'],
         dest: 'www'
       }]
+    },
+    fonts: {
+        files: [{
+            expand: true,
+            flatten: true,
+            src: ['.tmp/public/vendor/fonts/*'],
+            dest: '.tmp/public/fonts'
+        }]
     }
   });
 

@@ -14,7 +14,8 @@ module.exports = function(grunt) {
 
   grunt.config.set('clean', {
     dev: ['.tmp/public/**'],
-    build: ['www']
+    build: ['www'],
+    sails: ['.tmp/public/js/dependencies/dist/sails.io.js'] //remove angular-resource-sails dependency
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');

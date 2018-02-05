@@ -24,4 +24,5 @@ module.exports.bootstrap = function(cb) {
         Employee.seed,
         Plagehorraire.seed
     ], cb);
+    //cb();
 };
