@@ -32,9 +32,24 @@ module.exports.routes = {
      * `assets` directory)                                                      *
      *                                                                          *
      ***************************************************************************/
+    'GET /welcome': function(req, res, next) {
+        if (req.isSocket && req.method == 'GET') {
+            _.forEach(sails.models, function(model) {
+                model.watch(req.socket);
+
+            });
+            sails.sockets.join(req.socket, 'PresenceApplication');
+            //Article.watch(req.socket);
+            sails.sockets.broadcast('PresenceApplication', 'welcome', { greeting: 'Hola!' });
+            return res.json({ message: 'Welcome' });
+        }
+    },
+    'GET /': 'PageController.navigate',
+    'GET /employee/bybadge/:badge': 'EmployeeContrller.byBadge',
     'PUT /plage': 'EmployeeController.setPlage',
     'PUT /entree': 'PointageController.entree',
     'PUT /sortie': 'PointageController.sortie',
+    'GET /pointage/for/:id': 'PointageController.forEmployee',
     'PUT /solde': 'EmployeeController.solde',
     'PUT /heuresup': 'EmployeeController.heureSupplementaire',
     'GET /now': function(req, res) {
@@ -42,9 +57,9 @@ module.exports.routes = {
         moment.locale('fr');
         return res.json({ moment: moment().format(), date: new Date() });
     },
-    '/': {
-        view: 'homepage'
-    },
+    /* '/': {
+         view: 'homepage'
+     },*/
 
 
     /***************************************************************************

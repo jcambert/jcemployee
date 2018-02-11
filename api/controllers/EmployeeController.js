@@ -46,7 +46,7 @@ module.exports = {
     heureSupplementaire: function(req, res) {
         var empid = req.query.empid;
         var enable = req.query.enable;
-        Employee.findOne(_.pick(req.query,'id') )
+        Employee.findOne(_.pick(req.query, 'id'))
             .then(function(employee) {
                 employee.heuresupplementaire = enable || !employee.heuresupplementaire;
                 employee.save(function() {
@@ -55,6 +55,17 @@ module.exports = {
             })
             .catch(function(err) {
                 return res.badRequest(err);
+            });
+    },
+    byBadge: function(req, res) {
+        var badge = req.param('id');
+        if (_.isUndefined(badge)) return res.notFound();
+        Employee.findOne({ badge: badge })
+            .then(function(employee) {
+                return res.json(employee);
+            })
+            .catch(function(err) {
+                return res.notFound(err);
             });
     }
 };

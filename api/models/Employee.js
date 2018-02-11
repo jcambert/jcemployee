@@ -80,8 +80,20 @@ module.exports = {
             return next();
         }
     },
+    afterCreate: function(employee, next) {
+        sails.sockets.broadcast('PresenceApplication', 'employee', { verb: 'created', id: employee.id, data: employee });
+        //Pointage.publishAdd(pointage.id, "Pointage", pointage);
+        return next();
+    },
+    afterUpdate: function(employee, next) {
+        //Pointage.publishUpdate(pointage.id, "Pointage", pointage);
+        sails.sockets.broadcast('PresenceApplication', 'employee', { verb: 'updated', id: employee.id, data: employee });
+        return next();
+    },
+
     seedData: [
         { id: 1, nom: 'ambert', prenom: 'jean-christophe', badge: 1 },
-        { id: 2, nom: 'ambert', prenom: 'maryline', badge: 2 }
+        { id: 2, nom: 'ambert', prenom: 'maryline', badge: 2 },
+        { id: 3, nom: 'ambert', prenom: 'loc', badge: 3, solde: true }
     ]
 };

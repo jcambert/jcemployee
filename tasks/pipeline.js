@@ -17,11 +17,11 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'linker/bower_components/bootstrap/dist/css/bootstrap.css',
-  'styles/**/*.css',
-  //'linker/bower_components/**/*.css',
-  '!styles/**/404.css',
-  "!styles/**/auth.css"
+    //'linker/bower_components/bootstrap/dist/css/bootstrap.css',
+    'styles/**/*.css',
+    //'linker/bower_components/**/*.css',
+    '!styles/**/404.css',
+    "!styles/**/auth.css"
 ];
 
 
@@ -30,42 +30,38 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
 
-  // Load sails.io before everything else
-  'js/dependencies/sails.io.js',
+    // Load sails.io before everything else
+    'js/dependencies/sails.io.js',
 
 
 
-  //Bower components 
-  'linker/bower_components/jquery/dist/jquery.min.js',
-  'linker/bower_components/jquery-ui/jquery-ui.min.js',
-  'linker/bower_componentss/**/jquery*.js',
-  'linker/bower_components/chart.js/dist/Chart.js',
-  'linker/bower_components/amcharts/dist/amcharts/amcharts.js',
-  'linker/bower_components/amcharts/dist/amcharts/*.js',
-  'linker/bower_components/ammap/dist/ammap/ammap.js',
-  'linker/bower_components/ammap/dist/ammap/maps/js/worldLow.js',
-  'linker/bower_components/angular/angular.min.js',
-  //'js/dependencies/angular.js',
-  //'js/dependencies/ui-bootstrap-tpls.js',
-  'linker/bower_components/dist/js/bootstrap.js',
-  'linker/bower_components/moment/min/moment.min.js',
-  //'js/dependencies/rangy-core.js',
-  //'js/dependencies/rangy-*.js',
-  'linker/bower_components/angular-ui-clock/angular-clock.js',
-  // Dependencies like jQuery, or Angular are brought in here
-  'js/**/*.module.js',
-  'js/**/*.provider.js',
-  'js/**/*.service.js',
-  'js/theme/theme*.js',
-  'js/theme/**/*.js',
-  'js/pages/**/*.js',
-  // All of the rest of your client-side js files
-  // will be injected here in no particular order.
-  'js/**/*.js',
-  'js/app.js',
+    //Bower components 
+    'js/dependencies/jquery.min.js',
+    // 'js/dependencies/jquery-ui/jquery-ui.min.js',
+    'linker/bower_components/**/jquery*.js',
 
-  //"linker/bower_components/**/*.js",
-  "!js/dependencies/demo/demo.js"
+    'js/dependencies/angular.min.js',
+    //'js/dependencies/angular.js',
+    //'js/dependencies/ui-bootstrap-tpls.js',
+    'js/dependencies/bootstrap.min.js',
+    //'js/dependencies/moment/min/moment.min.js',
+    //'js/dependencies/rangy-core.js',
+    //'js/dependencies/rangy-*.js',
+    'js/dependencies/angular-clock.min.js',
+    // Dependencies like jQuery, or Angular are brought in here
+    'js/**/*.module.js',
+    'js/**/*.provider.js',
+    'js/**/*.service.js',
+    //'js/theme/theme*.js',
+    //'js/theme/**/*.js',
+    //'js/pages/**/*.js',
+    // All of the rest of your client-side js files
+    // will be injected here in no particular order.
+    'js/**/*.js',
+    'js/*.app.js',
+
+    //"linker/bower_components/**/*.js",
+    "!js/dependencies/demo/demo.js"
 ];
 
 
@@ -79,7 +75,7 @@ var jsFilesToInject = [
 // templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
-  'templates/**/*.html'
+    'templates/**/*.html'
 ];
 
 
@@ -95,25 +91,25 @@ var tmpPath = '.tmp/public/';
 // (i.e. where the other Grunt tasks spit them out, or in some cases, where
 // they reside in the first place)
 module.exports.cssFilesToInject = cssFilesToInject.map(function(cssPath) {
-  // If we're ignoring the file, make sure the ! is at the beginning of the path
-  if (cssPath[0] === '!') {
-      return require('path').join('!.tmp/public/', cssPath.substr(1));
-  }
-  return require('path').join('.tmp/public/', cssPath);
+    // If we're ignoring the file, make sure the ! is at the beginning of the path
+    if (cssPath[0] === '!') {
+        return require('path').join('!.tmp/public/', cssPath.substr(1));
+    }
+    return require('path').join('.tmp/public/', cssPath);
 });
 
 
 module.exports.jsFilesToInject = jsFilesToInject.map(function(jsPath) {
-  // If we're ignoring the file, make sure the ! is at the beginning of the path
-  if (jsPath[0] === '!') {
-      return require('path').join('!.tmp/public/', jsPath.substr(1));
-  }
-  return require('path').join('.tmp/public/', jsPath);
+    // If we're ignoring the file, make sure the ! is at the beginning of the path
+    if (jsPath[0] === '!') {
+        return require('path').join('!.tmp/public/', jsPath.substr(1));
+    }
+    return require('path').join('.tmp/public/', jsPath);
 });
 module.exports.templateFilesToInject = templateFilesToInject.map(function(tplPath) {
-  // If we're ignoring the file, make sure the ! is at the beginning of the path
-  if (tplPath[0] === '!') {
-      return require('path').join('!assets/', tplPath.substr(1));
-  }
-  return require('path').join('assets/', tplPath);
+    // If we're ignoring the file, make sure the ! is at the beginning of the path
+    if (tplPath[0] === '!') {
+        return require('path').join('!assets/', tplPath.substr(1));
+    }
+    return require('path').join('assets/', tplPath);
 });

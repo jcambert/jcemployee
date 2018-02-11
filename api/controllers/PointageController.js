@@ -7,7 +7,7 @@
 var erp = require('../core/index');
 module.exports = {
     entree: function(req, res) {
-       
+
         Pointage.create(req.query).exec(function(err) {
             if (err) return res.badRequest(err);
             return res.ok();
@@ -16,15 +16,25 @@ module.exports = {
     sortie: function(req, res) {
         var empid = req.query.empid;
 
-        Pointage.find( _.pick(req.query,'employee')).sort('date desc').sort('entreereel desc').limit(1).exec(function(err, last) {
+        Pointage.find(_.pick(req.query, 'employee')).sort('date desc').sort('entreereel desc').limit(1).exec(function(err, last) {
             if (err) return res.badRequest(err);
             last = last[0];
             if (_.isUndefined(last) || !_.isUndefined(last.sortie)) return res.badRequest(new Error("Vous devez deja saisir un mouvement en entrée"));
-            last.sortie = req.query.sortie || erp.pointage.now();// new Date();
+            last.sortie = req.query.sortie || erp.pointage.now(); // new Date();
             last.save(function(err) {
                 if (err) return res.badRequest(err);
                 return res.ok();
             });
         });
     },
+    forEmployee: function(req, res) {
+        Pointage.find({ employee: req.params.id }).sort('entreereel desc').limit(20)
+            .then(function(pointages) {
+                return res.json(pointages);
+            })
+            .catch(function(err) {
+                return res.badRequest(err);
+            });
+
+    }
 };
