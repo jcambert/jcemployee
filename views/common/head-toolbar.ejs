@@ -1,0 +1,26 @@
+<md-toolbar>
+  <div class="md-toolbar-tools" ng-if="allowClickTitle">
+
+    <md-button aria-label="Accueil" ng-click="go('/')">
+      <md-tooltip>Retour à l'acceuil</md-tooltip>
+      <md-icon md-svg-icon="img/icons/home.svg"></md-icon>
+    </md-button>
+    <span flex></span>
+    <md-truncate>
+      <%= title %>
+    </md-truncate>
+
+    
+
+  </div>
+  <div class="md-toolbar-tools" ng-if="!allowClickTitle">
+
+
+      <span flex></span>
+    <md-truncate>
+      <%= title %>
+    </md-truncate>
+
+
+  </div>
+</md-toolbar>

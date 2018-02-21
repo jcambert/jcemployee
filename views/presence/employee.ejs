@@ -9,8 +9,8 @@
                         <h3>
                             <span>Gestion des Employee</span>
                         </h3>
-                        <md-button class="md-fab md-primary" aria-label="Use Android" ng-click="go('/?controller=presence&view=config')">
-                            <md-tooltip md-direction="left">Ajouter</md-tooltip>
+                        <md-button class="md-fab md-primary" aria-label="Use Android" ng-click="go('/?controller=employee&view=add')">
+                            <md-tooltip md-direction="left">Ajouter un employee</md-tooltip>
                             <md-icon md-svg-src="img/icons/android.svg"></md-icon>
                         </md-button>
                         <md-switch class="md-secondary" ng-model="solde">
@@ -21,7 +21,10 @@
                 <md-list>
 
                     <md-list-item ng-repeat="employee in employees | filter:isSolde">
-                        <p> {{ employee.nom}} {{employee.prenom}} </p>
+                    <p ng-click="go('/?controller=employee&action=edit')"> {{ employee.nom}} {{employee.prenom}} <md-tooltip position="left">Clicker pour configurer {{employee.prenom}}</md-tooltip></p>
+                                
+        
+                        
 
                         <md-button class="md-fab md-primary" aria-label="Use Android" ng-click="removeEmployee($index)">
                             <md-tooltip md-direction="left">Supprimer {{employee.nom}} {{employee.prenom}}</md-tooltip>

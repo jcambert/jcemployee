@@ -5,17 +5,20 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+ var _ = require('lodash');
 module.exports = {
+    edit: function(req, res) {
+       
+        view = req.query.view || 'edit';
+        res.locals.title = "Edition de l'employé";
+        res.locals.layout = req.query.layout || "employee/layout";
+        res.locals.employee = req.query.id;
+        if(_.isUndefined(res.locals.employee))return res.badRequest('Pas d\'employe defini');
+        return res.view('employee/' + view);
+    },
     setPlage: function(req, res) {
         var empid = req.query.empid;
         var groupe = req.query.groupe;
-        /*Employee.findOne({id:empid})
-        .then(function(employee){
-
-        })
-        .catch(function(err){
-            return res.badRequest(err);
-        })*/
         Employee.findOne({ id: empid }).populate('plages').exec(function(err, employee) {
             if (err) return res.badRequest(err);
             if (_.isUndefined(employee)) return res.badRequest("Cet employee n'existe pas");
@@ -58,7 +61,7 @@ module.exports = {
             });
     },
     byBadge: function(req, res) {
-        var badge = req.param('id');
+        var badge = req.param('badge');
         if (_.isUndefined(badge)) return res.notFound();
         Employee.findOne({ badge: badge })
             .then(function(employee) {

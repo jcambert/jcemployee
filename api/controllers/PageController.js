@@ -7,7 +7,8 @@
 
 module.exports = {
     navigate: function(req, res) {
-        var controller = req.query.controller;
+        if(req.method!='GET' ||  req.isSocket)return res.badRequest();
+        var controller = req.query.controller || 'index';
         var action = req.query.action || 'get';
         if (_.isUndefined(controller)) {
             return res.notFound();
